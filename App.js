@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext, useEffect, useRef } from 'react';
 import {
   ShoppingCart, X, Plus, Minus, CheckCircle, Package, Info, Mail, ArrowLeft, Send,
-  Star, Search, ChevronLeft, ChevronRight, Eye, Grid
+  Star, Search, ChevronLeft, ChevronRight, Eye, Grid, Globe
 } from 'lucide-react';
 
 // 1. Create a Context for the Cart State
@@ -30,13 +30,13 @@ const setLocalStorageItem = (key, value) => {
 const PRODUCTS = [
   {
     id: 'tshirt-001',
-    name: 'X-Core Tee', // Renamed product
+    name: 'X-Core Tee',
     description: 'A robust tee built for the streets. Heavyweight 300 GSM cotton, oversized fit, raw-edge hemline, and reinforced stitching. Designed for maximum comfort and durability in any urban environment.',
     price: 34.99,
-    imageUrl: 'https://placehold.co/400x400/333333/E0E0E0?text=XApparel+White',
+    imageUrl: 'https://placehold.co/400x400/2A2A2A/E0E0E0?text=XApparel+White',
     additionalImageUrls: [
-      'https://placehold.co/400x400/444444/DDDDDD?text=XApparel+Back',
-      'https://placehold.co/400x400/555555/EEEEEE?text=XApparel+Detail'
+      'https://placehold.co/400x400/3A3A3A/DDDDDD?text=XApparel+Back',
+      'https://placehold.co/400x400/4A4A4A/EEEEEE?text=XApparel+Detail'
     ],
     availableSizes: ['S', 'M', 'L', 'XL'],
     availableColors: ['White', 'Black', 'Grey'],
@@ -54,10 +54,10 @@ const PRODUCTS = [
     name: 'Night Rider Graphic',
     description: 'Limited edition graphic print on premium black, oversized fit. Features a reflective "Night Rider" print across the back and a subtle brand tag on the sleeve. This oversized fit tee is a statement piece for the nocturnal urban explorer.',
     price: 49.99,
-    imageUrl: 'https://placehold.co/400x400/1A1A1A/E0E0E0?text=XApparel+Black',
+    imageUrl: 'https://placehold.co/400x400/151515/E0E0E0?text=XApparel+Black',
     additionalImageUrls: [
-      'https://placehold.co/400x400/2B2B2B/CCCCCC?text=Night+Back',
-      'https://placehold.co/400x400/3C3C3C/DDDDDD?text=Night+Detail'
+      'https://placehold.co/400x400/202020/CCCCCC?text=Night+Back',
+      'https://placehold.co/400x400/2B2B2B/DDDDDD?text=Night+Detail'
     ],
     availableSizes: ['M', 'L', 'XL'],
     availableColors: ['Black', 'Dark Navy'],
@@ -75,10 +75,10 @@ const PRODUCTS = [
     name: 'Asphalt Stripe',
     description: 'Subtle grey stripes on a dark base. Crafted from a unique blend of cotton and recycled polyester, offering both comfort and sustainability. Minimalist design with a focus on clean lines and a modern silhouette, perfect for layering.',
     price: 38.50,
-    imageUrl: 'https://placehold.co/400x400/2C2C2C/E0E0E0?text=XApparel+Stripe',
+    imageUrl: 'https://placehold.co/400x400/202020/E0E0E0?text=XApparel+Stripe',
     additionalImageUrls: [
-      'https://placehold.co/400x400/3D3D3D/BBBBBB?text=Stripe+Side',
-      'https://placehold.co/400x400/4E4E4E/AAAAAA?text=Stripe+Texture'
+      'https://placehold.co/400x400/303030/BBBBBB?text=Stripe+Side',
+      'https://placehold.co/400x400/404040/AAAAAA?text=Stripe+Texture'
     ],
     availableSizes: ['S', 'M', 'L'],
     availableColors: ['Charcoal', 'Ash Grey'],
@@ -95,10 +95,10 @@ const PRODUCTS = [
     name: 'District Bloom Tee',
     description: 'Vibrant, street-art inspired design on a soft-washed tee. Each piece features a unique abstract "bloom" graphic on the chest, a nod to urban art culture. Pre-shrunk cotton for a consistent fit, wash after wash.',
     price: 42.99,
-    imageUrl: 'https://placehold.co/400x400/4B0082/E0E0E0?text=XApparel+Print',
+    imageUrl: 'https://placehold.co/400x400/400080/E0E0E0?text=XApparel+Print',
     additionalImageUrls: [
-      'https://placehold.co/400x400/5C1193/B0B0B0?text=Bloom+Detail',
-      'https://placehold.co/400x400/6D22A4/C0C0C0?text=Bloom+Side'
+      'https://placehold.co/400x400/501090/B0B0B0?text=Bloom+Detail',
+      'https://placehold.co/400x400/6020A0/C0C0C0?text=Bloom+Side'
     ],
     availableSizes: ['M', 'L', 'XL', 'XXL'],
     availableColors: ['Deep Purple', 'Forest Green'],
@@ -113,10 +113,10 @@ const PRODUCTS = [
     name: 'Concrete Camo Crew',
     description: 'Heavyweight crewneck tee with a subtle concrete camouflage print. Durable and designed for longevity, this piece is ideal for those who value both style and resilience. Ribbed collar and cuffs for a secure fit.',
     price: 45.00,
-    imageUrl: 'https://placehold.co/400x400/505050/A0A0A0?text=XApparel+Camo',
+    imageUrl: 'https://placehold.co/400x400/454545/A0A0A0?text=XApparel+Camo',
     additionalImageUrls: [
-      'https://placehold.co/400x400/616161/BBBBBB?text=Camo+Texture',
-      'https://placehold.co/400x400/727272/CCCCCC?text=Camo+Angles'
+      'https://placehold.co/400x400/555555/BBBBBB?text=Camo+Texture',
+      'https://placehold.co/400x400/656565/CCCCCC?text=Camo+Angles'
     ],
     availableSizes: ['S', 'M', 'L', 'XL'],
     availableColors: ['Grey Camo', 'Green Camo'],
@@ -131,10 +131,10 @@ const PRODUCTS = [
     name: 'Neon Grid Oversized',
     description: 'Bold oversized tee featuring an electric neon grid pattern. Made from breathable, lightweight cotton, it’s perfect for making a statement without sacrificing comfort. Drop shoulder design for an extra relaxed fit.',
     price: 47.50,
-    imageUrl: 'https://placehold.co/400x400/0A0A0A/00FFFF?text=XApparel+Neon',
+    imageUrl: 'https://placehold.co/400x400/050505/00FFFF?text=XApparel+Neon',
     additionalImageUrls: [
-      'https://placehold.co/400x400/1B1B1B/00EFEF?text=Neon+Back',
-      'https://placehold.co/400x400/2C2C2C/00DFDF?text=Neon+Side'
+      'https://placehold.co/400x400/101010/00EFEF?text=Neon+Back',
+      'https://placehold.co/400x400/1B1B1B/00DFDF?text=Neon+Side'
     ],
     availableSizes: ['M', 'L', 'XL'],
     availableColors: ['Black', 'Navy'],
@@ -181,19 +181,19 @@ const StarRating = ({ rating, count, onRatingClick = null }) => {
 // Hero Section Component
 const HeroSection = ({ onNavigate }) => {
   return (
-    <section className="relative h-96 md:h-[500px] bg-cover bg-center flex items-center justify-center text-white overflow-hidden rounded-xl shadow-lg mx-4 mb-12"
-      style={{ backgroundImage: `url('https://placehold.co/1200x500/1A1A1A/E0E0E0?text=XApparel+Collection')` }}>
-      <div className="absolute inset-0 bg-black opacity-60"></div>
-      <div className="relative z-10 text-center p-4 animate-fade-in">
-        <h2 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-tight mb-4 drop-shadow-lg">
-          Unleash Your Urban Edge with XApparel
+    <section className="relative h-96 md:h-[500px] bg-cover bg-center flex items-center justify-center text-white overflow-hidden rounded-2xl shadow-2xl mx-4 mb-16 animate-fade-in-scale"
+      style={{ backgroundImage: `url('https://placehold.co/1400x600/101010/E0E0E0?text=XApparel+New+Drop+Hero')` }}>
+      <div className="absolute inset-0 bg-gradient-to-br from-black to-zinc-900 opacity-80"></div>
+      <div className="relative z-10 text-center p-4">
+        <h2 className="text-6xl md:text-8xl font-extrabold uppercase tracking-tighter leading-none mb-6 drop-shadow-2xl animate-slide-in-up-1">
+          Unleash Your <span className="text-teal-400">X</span> Edge
         </h2>
-        <p className="text-xl md:text-2xl font-medium text-gray-300 drop-shadow">
+        <p className="text-xl md:text-3xl font-medium text-gray-300 drop-shadow animate-slide-in-up-2">
           Exclusive Drops. Unmatched Style.
         </p>
         <button
           onClick={() => onNavigate('home')}
-          className="mt-8 bg-teal-500 text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-teal-600 transition duration-300 transform hover:scale-105 shadow-xl uppercase tracking-wider"
+          className="mt-10 bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-10 py-5 rounded-full text-xl font-bold uppercase tracking-wide hover:from-teal-600 hover:to-cyan-700 transition duration-300 transform hover:scale-105 shadow-xl animate-slide-in-up-3 custom-button-glow"
         >
           Shop New Arrivals
         </button>
@@ -237,23 +237,23 @@ const CountdownTimer = ({ targetDate }) => {
 
     timerComponents.push(
       <span key={interval} className="flex flex-col items-center">
-        <span className="text-3xl md:text-5xl font-extrabold text-teal-400">{String(timeLeft[interval]).padStart(2, '0')}</span>
-        <span className="text-sm md:text-lg text-gray-400 uppercase">{interval}</span>
+        <span className="text-4xl md:text-6xl font-extrabold text-teal-400">{String(timeLeft[interval]).padStart(2, '0')}</span>
+        <span className="text-base md:text-xl text-gray-400 uppercase">{interval}</span>
       </span>
     );
   });
 
   return (
-    <div className="bg-gray-800 rounded-xl shadow-lg p-6 md:p-10 text-center mb-12 mx-4 border border-gray-700">
-      <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-6 uppercase tracking-tight">Next Drop In:</h3>
+    <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-xl p-8 md:p-12 text-center mb-16 mx-4 border border-gray-700 animate-fade-in">
+      <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-8 uppercase tracking-tighter">Next Drop In:</h3>
       {timerComponents.length ? (
-        <div className="flex justify-center items-center space-x-4 md:space-x-8">
+        <div className="flex justify-center items-center space-x-6 md:space-x-12">
           {timerComponents}
         </div>
       ) : (
-        <p className="text-xl text-teal-400 font-bold">The Drop Has Landed!</p>
+        <p className="text-2xl text-teal-400 font-bold">The Drop Has Landed!</p>
       )}
-      <p className="text-gray-400 text-sm mt-4">Sign up for early access below!</p>
+      <p className="text-gray-400 text-base mt-6">Sign up for early access below!</p>
     </div>
   );
 };
@@ -266,38 +266,37 @@ const NewsletterSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    // Simulate API call
     try {
       console.log('Newsletter signup email for XApparel:', email);
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setStatus('success');
-      setEmail(''); // Clear email field
+      setEmail('');
     } catch (error) {
       setStatus('error');
     }
   };
 
   return (
-    <div className="bg-gray-800 rounded-xl shadow-lg p-6 md:p-10 text-center mt-12 mb-12 mx-4 border border-gray-700">
-      <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-6 uppercase tracking-tight">Stay Ahead of the Drop</h3>
-      <p className="text-gray-400 text-lg mb-8">Get exclusive early access and updates from XApparel straight to your inbox.</p>
-      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 max-w-lg mx-auto">
+    <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-xl p-8 md:p-12 text-center mt-16 mb-16 mx-4 border border-gray-700 animate-fade-in">
+      <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-8 uppercase tracking-tighter">Stay Ahead of the Drop</h3>
+      <p className="text-gray-400 text-xl mb-10">Get exclusive early access and updates from XApparel straight to your inbox.</p>
+      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row justify-center items-center space-y-5 md:space-y-0 md:space-x-6 max-w-xl mx-auto">
         <input
           type="email"
           placeholder="Enter your email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full md:flex-grow py-3 px-5 bg-gray-700 text-gray-100 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder-gray-400"
+          className="w-full md:flex-grow py-4 px-6 bg-gray-800 text-gray-100 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-teal-500 placeholder-gray-400 text-lg"
         />
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="w-full md:w-auto bg-teal-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-teal-600 transition duration-300 transform hover:scale-105 shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+          className="w-full md:w-auto bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-8 py-4 rounded-full text-xl font-semibold hover:from-teal-600 hover:to-cyan-700 transition duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 custom-button-glow"
         >
           {status === 'submitting' ? (
             <>
-              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
@@ -305,17 +304,17 @@ const NewsletterSignup = () => {
             </>
           ) : (
             <>
-              <Send size={20} />
+              <Send size={24} />
               <span>Subscribe Now</span>
             </>
           )}
         </button>
       </form>
       {status === 'success' && (
-        <p className="text-teal-400 mt-4 text-sm font-semibold">Thanks for subscribing!</p>
+        <p className="text-teal-400 mt-6 text-base font-semibold">Thanks for subscribing!</p>
       )}
       {status === 'error' && (
-        <p className="text-red-400 mt-4 text-sm font-semibold">Something went wrong. Please try again.</p>
+        <p className="text-red-400 mt-6 text-base font-semibold">Something went wrong. Please try again.</p>
       )}
     </div>
   );
@@ -346,24 +345,24 @@ const RecentlyViewed = ({ onSelectProduct }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 mt-12 mb-12">
-      <h3 className="text-3xl font-extrabold text-white text-center mb-8 uppercase tracking-tight">Recently Eyed</h3>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="container mx-auto px-4 py-8 mt-16 mb-16 animate-fade-in">
+      <h3 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-10 uppercase tracking-tighter">Recently Eyed</h3>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
         {viewedProducts.slice(0, 4).map(product => (
           <div
             key={product.id}
             onClick={() => onSelectProduct(product.id)}
-            className="bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+            className="bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer custom-border-glow animate-fade-in-item"
           >
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="w-full h-32 object-cover object-center"
+              className="w-full h-40 object-cover object-center"
               onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x400/555555/999999?text=Img`; }}
             />
-            <div className="p-3">
-              <h4 className="text-md font-semibold text-gray-100 line-clamp-1">{product.name}</h4>
-              <span className="text-lg font-bold text-teal-400">{formatCurrency(product.price)}</span>
+            <div className="p-4">
+              <h4 className="text-lg font-semibold text-gray-100 line-clamp-1">{product.name}</h4>
+              <span className="text-xl font-bold text-teal-400">{formatCurrency(product.price)}</span>
             </div>
           </div>
         ))}
@@ -387,35 +386,34 @@ const ProductCard = ({ product, onSelectProduct }) => {
   };
 
   return (
-    <div className="bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
-         onClick={() => onSelectProduct(product.id)}>
+    <div className="bg-gray-800 rounded-2xl shadow-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer custom-border-glow animate-fade-in-item">
       <img
         src={product.imageUrl}
         alt={product.name}
-        className="w-full h-48 object-cover object-center"
+        className="w-full h-56 object-cover object-center"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = `https://placehold.co/400x400/555555/999999?text=Image+Error`;
         }}
       />
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-100 mb-2">{product.name}</h3>
+        <h3 className="text-2xl font-bold text-gray-100 mb-2">{product.name}</h3>
         {product.averageRating > 0 && (
-          <div className="mb-2">
+          <div className="mb-3">
             <StarRating rating={product.averageRating} count={product.ratingCount} />
           </div>
         )}
         <p className="text-gray-400 text-sm mb-4 line-clamp-2">{product.description}</p>
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-2xl font-bold text-teal-400">{formatCurrency(product.price)}</span>
+        <div className="flex justify-between items-center mt-6">
+          <span className="text-3xl font-extrabold text-teal-400">{formatCurrency(product.price)}</span>
           {isFutureDrop ? (
-            <span className="text-sm font-semibold text-gray-400 bg-gray-700 px-3 py-1 rounded-full">Coming Soon</span>
+            <span className="text-base font-semibold text-gray-400 bg-gray-700 px-4 py-2 rounded-full">Coming Soon</span>
           ) : (
             <button
               onClick={handleAddClick}
-              className="flex items-center space-x-2 bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition duration-300 transform hover:scale-105 shadow-md"
+              className="flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:from-teal-600 hover:to-cyan-700 transition duration-300 transform hover:scale-105 shadow-md custom-button-glow"
             >
-              <ShoppingCart size={18} />
+              <ShoppingCart size={20} />
               <span>Add to Drop</span>
             </button>
           )}
@@ -427,13 +425,11 @@ const ProductCard = ({ product, onSelectProduct }) => {
 
 // 3. Product List Component (Home Page - now with search and sort controls)
 const ProductList = ({ onSelectProduct, searchTerm, sortBy, onSearchChange, onSortChange }) => {
-  // Filter products based on search term
   const filteredProducts = PRODUCTS.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     product.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Sort products
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortBy === 'price-asc') {
       return a.price - b.price;
@@ -444,9 +440,9 @@ const ProductList = ({ onSelectProduct, searchTerm, sortBy, onSearchChange, onSo
     } else if (sortBy === 'name-desc') {
       return b.name.localeCompare(a.name);
     } else if (sortBy === 'rating') {
-      return b.averageRating - a.averageRating; // Highest rated first
+      return b.averageRating - a.averageRating;
     }
-    return 0; // Default or 'newest' (which is just current array order)
+    return 0;
   });
 
   const nextDropProduct = PRODUCTS.find(p => p.releaseDate && new Date(p.releaseDate) > new Date());
@@ -457,25 +453,24 @@ const ProductList = ({ onSelectProduct, searchTerm, sortBy, onSearchChange, onSo
 
       {nextDropProduct && <CountdownTimer targetDate={nextDropProduct.releaseDate} />}
 
-      <h2 className="text-4xl font-extrabold text-white text-center mb-12 uppercase tracking-tight">Our Latest Drops</h2>
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-16 uppercase tracking-tighter animate-slide-in-up-1">Our Latest Drops</h2>
 
-      {/* Search and Sort Controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 space-y-4 sm:space-y-0 sm:space-x-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-10 space-y-5 sm:space-y-0 sm:space-x-6 animate-fade-in">
         <div className="relative w-full sm:w-1/2">
           <input
             type="text"
             placeholder="Search drops..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full py-3 px-5 pr-10 bg-gray-800 text-gray-100 rounded-full border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder-gray-400"
+            className="w-full py-3.5 px-6 pr-12 bg-gray-800 text-gray-100 rounded-full border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 placeholder-gray-400 text-lg"
           />
-          <Search size={20} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search size={22} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" />
         </div>
         <div className="w-full sm:w-1/3">
           <select
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value)}
-            className="block w-full py-3 px-4 border border-gray-700 bg-gray-800 rounded-full text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 appearance-none"
+            className="block w-full py-3.5 px-5 border border-gray-700 bg-gray-800 rounded-full text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 appearance-none text-lg"
           >
             <option value="default">Sort By</option>
             <option value="price-asc">Price: Low to High</option>
@@ -530,19 +525,19 @@ const ProductDetail = ({ productId, onBackToList }) => {
       setSelectedSize(product.availableSizes[0] || '');
       setSelectedColor(product.availableColors[0] || '');
       setMainImage(product.imageUrl);
-      setReviewSubmissionStatus(null); // Clear review status on product change
+      setReviewSubmissionStatus(null);
     }
   }, [product]);
 
   if (!product) {
     return (
-      <div className="container mx-auto px-4 py-8 max-w-4xl text-center bg-gray-800 rounded-xl shadow-lg border border-gray-700 text-gray-100">
+      <div className="container mx-auto px-4 py-8 max-w-4xl text-center bg-gray-800 rounded-2xl shadow-xl border border-gray-700 text-gray-100 animate-fade-in">
         <p className="text-xl">Product not found.</p>
         <button
           onClick={onBackToList}
-          className="mt-6 bg-gray-700 text-white px-6 py-3 rounded-full hover:bg-gray-600 transition duration-300"
+          className="mt-8 bg-gray-700 text-white px-7 py-3.5 rounded-full hover:bg-gray-600 transition duration-300 text-lg flex items-center justify-center mx-auto space-x-2"
         >
-          <ArrowLeft size={20} className="inline-block mr-2" /> Back to Drops
+          <ArrowLeft size={20} /> <span>Back to Drops</span>
         </button>
       </div>
     );
@@ -574,7 +569,6 @@ const ProductDetail = ({ productId, onBackToList }) => {
       setReviewSubmissionStatus('error: Please select a rating.');
       return;
     }
-    // Simulate adding review
     console.log('New review submitted:', reviewFormData);
     setReviewSubmissionStatus('success');
     setShowReviewForm(false);
@@ -585,34 +579,34 @@ const ProductDetail = ({ productId, onBackToList }) => {
   const allImages = [product.imageUrl, ...(product.additionalImageUrls || [])];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl bg-gray-800 rounded-xl shadow-lg border border-gray-700 text-gray-100">
+    <div className="container mx-auto px-4 py-8 max-w-5xl bg-gray-800 rounded-2xl shadow-xl border border-gray-700 text-gray-100 animate-fade-in">
       <button
         onClick={onBackToList}
-        className="flex items-center space-x-2 text-teal-400 hover:text-teal-300 transition duration-300 font-semibold mb-6"
+        className="flex items-center space-x-2 text-teal-400 hover:text-teal-300 transition duration-300 font-semibold mb-8 text-lg"
       >
-        <ArrowLeft size={20} />
+        <ArrowLeft size={22} />
         <span>Back to All Drops</span>
       </button>
 
-      <div className="md:flex md:space-x-8">
+      <div className="md:flex md:space-x-12">
         <div className="md:w-1/2">
           <img
             src={mainImage}
             alt={product.name}
-            className="w-full h-auto rounded-lg object-cover object-center shadow-lg mb-4"
+            className="w-full h-auto rounded-xl object-cover object-center shadow-lg mb-6 animate-fade-in-image"
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = `https://placehold.co/600x600/555555/999999?text=Image+Error`;
             }}
           />
           {allImages.length > 1 && (
-            <div className="flex space-x-2 justify-center">
+            <div className="flex space-x-3 justify-center">
               {allImages.map((img, index) => (
                 <img
                   key={index}
                   src={img}
                   alt={`${product.name} thumbnail ${index + 1}`}
-                  className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 ${mainImage === img ? 'border-teal-400' : 'border-transparent'} hover:border-teal-400 transition-colors`}
+                  className={`w-24 h-24 object-cover rounded-lg cursor-pointer border-2 ${mainImage === img ? 'border-teal-400 shadow-md' : 'border-transparent'} hover:border-teal-400 transition-all duration-200 transform hover:scale-105`}
                   onClick={() => setMainImage(img)}
                   onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/80x80/555555/999999?text=Thumb`; }}
                 />
@@ -620,26 +614,26 @@ const ProductDetail = ({ productId, onBackToList }) => {
             </div>
           )}
         </div>
-        <div className="md:w-1/2 mt-8 md:mt-0 flex flex-col justify-between">
+        <div className="md:w-1/2 mt-10 md:mt-0 flex flex-col justify-between">
           <div>
-            <h2 className="text-4xl font-extrabold text-white mb-4 uppercase tracking-tight">{product.name}</h2>
+            <h2 className="text-5xl font-extrabold text-white mb-5 uppercase tracking-tighter animate-slide-in-up-1">{product.name}</h2>
             {product.averageRating > 0 && (
-              <div className="mb-4">
+              <div className="mb-5">
                 <StarRating rating={product.averageRating} count={product.ratingCount} />
               </div>
             )}
-            <p className="text-gray-400 text-lg mb-6 leading-relaxed">{product.description}</p>
-            <span className="text-4xl font-extrabold text-teal-400 mb-6 block">{formatCurrency(product.price)}</span>
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed animate-slide-in-up-2">{product.description}</p>
+            <span className="text-5xl font-extrabold text-teal-400 mb-8 block animate-slide-in-up-3">{formatCurrency(product.price)}</span>
 
             {!isFutureDrop ? (
               <>
-                <div className="mb-6">
-                  <label htmlFor="size-select" className="block text-gray-300 text-sm font-bold mb-2">Select Size:</label>
+                <div className="mb-7 animate-slide-in-up-4">
+                  <label htmlFor="size-select" className="block text-gray-300 text-base font-bold mb-2">Select Size:</label>
                   <select
                     id="size-select"
                     value={selectedSize}
                     onChange={(e) => setSelectedSize(e.target.value)}
-                    className="block w-full py-2 px-3 border border-gray-700 bg-gray-700 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 appearance-none"
+                    className="block w-full py-3 px-4 border border-gray-700 bg-gray-700 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 appearance-none text-base"
                   >
                     {product.availableSizes.map(size => (
                       <option key={size} value={size}>{size}</option>
@@ -647,13 +641,13 @@ const ProductDetail = ({ productId, onBackToList }) => {
                   </select>
                 </div>
 
-                <div className="mb-6">
-                  <label htmlFor="color-select" className="block text-gray-300 text-sm font-bold mb-2">Select Color:</label>
+                <div className="mb-7 animate-slide-in-up-5">
+                  <label htmlFor="color-select" className="block text-gray-300 text-base font-bold mb-2">Select Color:</label>
                   <select
                     id="color-select"
                     value={selectedColor}
                     onChange={(e) => setSelectedColor(e.target.value)}
-                    className="block w-full py-2 px-3 border border-gray-700 bg-gray-700 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 appearance-none"
+                    className="block w-full py-3 px-4 border border-gray-700 bg-gray-700 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 appearance-none text-base"
                   >
                     {product.availableColors.map(color => (
                       <option key={color} value={color}>{color}</option>
@@ -662,27 +656,27 @@ const ProductDetail = ({ productId, onBackToList }) => {
                 </div>
 
                 {errorMessage && (
-                  <p className="text-red-400 text-sm mb-4">{errorMessage}</p>
+                  <p className="text-red-400 text-sm mb-5 animate-fade-in">{errorMessage}</p>
                 )}
               </>
             ) : (
-              <p className="text-lg text-gray-400 mb-6">This item is part of a future drop. Stay tuned for release!</p>
+              <p className="text-lg text-gray-400 mb-8 animate-fade-in">This item is part of a future drop. Stay tuned for release!</p>
             )}
           </div>
           {!isFutureDrop ? (
             <button
               onClick={handleAddToCart}
-              className="w-full flex items-center justify-center space-x-2 bg-teal-500 text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-teal-600 transition duration-300 transform hover:scale-105 shadow-lg uppercase tracking-wider mt-6"
+              className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:from-teal-600 hover:to-cyan-700 transition duration-300 transform hover:scale-105 shadow-lg uppercase tracking-wider mt-8 custom-button-glow animate-bounce-in"
             >
-              <ShoppingCart size={24} />
+              <ShoppingCart size={28} />
               <span>Add to Drop</span>
             </button>
           ) : (
             <button
               disabled
-              className="w-full flex items-center justify-center space-x-2 bg-gray-700 text-gray-400 px-8 py-4 rounded-full text-xl font-semibold opacity-50 cursor-not-allowed uppercase tracking-wider mt-6"
+              className="w-full flex items-center justify-center space-x-3 bg-gray-700 text-gray-400 px-10 py-5 rounded-full text-xl font-bold opacity-50 cursor-not-allowed uppercase tracking-wider mt-8"
             >
-              <ShoppingCart size={24} />
+              <ShoppingCart size={28} />
               <span>Drop Coming Soon</span>
             </button>
           )}
@@ -690,39 +684,39 @@ const ProductDetail = ({ productId, onBackToList }) => {
       </div>
 
       {/* Reviews Section */}
-      <div className="mt-12 pt-8 border-t border-gray-700">
-        <h3 className="text-3xl font-extrabold text-white mb-6 uppercase tracking-tight">Customer Reviews ({product.ratingCount})</h3>
+      <div className="mt-16 pt-10 border-t border-gray-700 animate-fade-in">
+        <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-8 uppercase tracking-tighter">Customer Reviews ({product.ratingCount})</h3>
         {product.reviews && product.reviews.length > 0 ? (
-          <div className="space-y-6">
+          <div className="space-y-8">
             {product.reviews.map(review => (
-              <div key={review.id} className="bg-gray-700 p-6 rounded-lg shadow-md">
+              <div key={review.id} className="bg-gray-700 p-7 rounded-lg shadow-md custom-border-glow-subtle animate-fade-in-item">
                 <StarRating rating={review.rating} />
-                <p className="text-gray-200 mt-2">{review.comment}</p>
-                <p className="text-gray-400 text-sm mt-3">- {review.author}</p>
+                <p className="text-gray-200 mt-3 text-base">{review.comment}</p>
+                <p className="text-gray-400 text-sm mt-4">- {review.author}</p>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-gray-400">No reviews yet. Be the first to share your thoughts!</p>
+          <p className="text-gray-400 text-lg">No reviews yet. Be the first to share your thoughts!</p>
         )}
 
         <button
           onClick={() => setShowReviewForm(!showReviewForm)}
-          className="mt-8 bg-gray-700 text-white px-6 py-3 rounded-full hover:bg-gray-600 transition duration-300 flex items-center space-x-2"
+          className="mt-10 bg-gray-700 text-white px-7 py-3.5 rounded-full hover:bg-gray-600 transition duration-300 flex items-center space-x-2 text-lg"
         >
           {showReviewForm ? 'Cancel Review' : 'Write a Review'}
         </button>
 
         {showReviewForm && (
-          <form onSubmit={handleReviewSubmit} className="mt-8 bg-gray-700 p-6 rounded-lg shadow-md space-y-4">
-            <h4 className="text-xl font-semibold text-white">Share Your Experience</h4>
+          <form onSubmit={handleReviewSubmit} className="mt-8 bg-gray-700 p-7 rounded-lg shadow-md space-y-5 animate-fade-in">
+            <h4 className="text-2xl font-semibold text-white">Share Your Experience</h4>
             <div>
-              <label className="block text-gray-300 text-sm font-bold mb-2">Your Rating:</label>
+              <label className="block text-gray-300 text-base font-bold mb-3">Your Rating:</label>
               <div className="flex space-x-1">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
-                    size={24}
+                    size={28}
                     className={`cursor-pointer ${star <= reviewFormData.rating ? 'text-yellow-400 fill-current' : 'text-gray-500'}`}
                     onClick={() => handleReviewRatingChange(star)}
                   />
@@ -730,19 +724,19 @@ const ProductDetail = ({ productId, onBackToList }) => {
               </div>
             </div>
             <div>
-              <label htmlFor="review-comment" className="block text-gray-300 text-sm font-bold mb-2">Your Comment:</label>
+              <label htmlFor="review-comment" className="block text-gray-300 text-base font-bold mb-3">Your Comment:</label>
               <textarea
                 id="review-comment"
                 name="comment"
                 value={reviewFormData.comment}
                 onChange={handleReviewChange}
                 required
-                rows="4"
-                className="shadow appearance-none border border-gray-600 rounded-lg w-full py-3 px-4 bg-gray-800 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+                rows="5"
+                className="shadow appearance-none border border-gray-600 rounded-lg w-full py-3 px-4 bg-gray-800 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
               ></textarea>
             </div>
             <div>
-              <label htmlFor="review-author" className="block text-gray-300 text-sm font-bold mb-2">Your Name/Alias:</label>
+              <label htmlFor="review-author" className="block text-gray-300 text-base font-bold mb-3">Your Name/Alias:</label>
               <input
                 type="text"
                 id="review-author"
@@ -750,14 +744,14 @@ const ProductDetail = ({ productId, onBackToList }) => {
                 value={reviewFormData.author}
                 onChange={handleReviewChange}
                 required
-                className="shadow appearance-none border border-gray-600 rounded-lg w-full py-3 px-4 bg-gray-800 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="shadow appearance-none border border-gray-600 rounded-lg w-full py-3 px-4 bg-gray-800 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
               />
             </div>
-            {reviewSubmissionStatus === 'success' && <p className="text-teal-400 text-center font-semibold">Review submitted successfully!</p>}
-            {reviewSubmissionStatus && reviewSubmissionStatus.startsWith('error') && <p className="text-red-400 text-center font-semibold">{reviewSubmissionStatus}</p>}
+            {reviewSubmissionStatus === 'success' && <p className="text-teal-400 text-center font-semibold mt-4">Review submitted successfully!</p>}
+            {reviewSubmissionStatus && reviewSubmissionStatus.startsWith('error') && <p className="text-red-400 text-center font-semibold mt-4">{reviewSubmissionStatus}</p>}
             <button
               type="submit"
-              className="bg-teal-500 text-white px-6 py-3 rounded-full hover:bg-teal-600 transition duration-300"
+              className="bg-teal-500 text-white px-7 py-3.5 rounded-full hover:bg-teal-600 transition duration-300 text-lg custom-button-glow"
             >
               Submit Review
             </button>
@@ -784,44 +778,44 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="flex items-center bg-gray-800 rounded-xl shadow-md p-4 mb-4 border border-gray-700">
+    <div className="flex items-center bg-gray-800 rounded-xl shadow-md p-5 mb-4 border border-gray-700 animate-fade-in-item">
       <img
         src={item.imageUrl}
         alt={item.name}
-        className="w-20 h-20 object-cover object-center rounded-md mr-4"
+        className="w-24 h-24 object-cover object-center rounded-lg mr-5"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = `https://placehold.co/80x80/555555/999999?text=Img`;
         }}
       />
       <div className="flex-grow">
-        <h3 className="text-lg font-semibold text-gray-100">{item.name}</h3>
+        <h3 className="text-xl font-semibold text-gray-100">{item.name}</h3>
         {item.selectedSize && <p className="text-gray-400 text-sm">Size: {item.selectedSize}</p>}
         {item.selectedColor && <p className="text-gray-400 text-sm">Color: {item.selectedColor}</p>}
-        <p className="text-gray-400">{formatCurrency(item.price)} each</p>
+        <p className="text-gray-400 text-base">{formatCurrency(item.price)} each</p>
       </div>
-      <div className="flex items-center space-x-2 mr-4">
+      <div className="flex items-center space-x-3 mr-5">
         <button
           onClick={() => handleUpdateQuantity(item.quantity - 1)}
           disabled={item.quantity <= 1}
-          className="bg-gray-700 text-gray-200 p-2 rounded-full hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-gray-700 text-gray-200 p-2.5 rounded-full hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 transform hover:scale-110"
         >
-          <Minus size={16} />
+          <Minus size={18} />
         </button>
-        <span className="font-bold text-lg text-white">{item.quantity}</span>
+        <span className="font-bold text-xl text-white">{item.quantity}</span>
         <button
           onClick={() => handleUpdateQuantity(item.quantity + 1)}
-          className="bg-gray-700 text-gray-200 p-2 rounded-full hover:bg-gray-600"
+          className="bg-gray-700 text-gray-200 p-2.5 rounded-full hover:bg-gray-600 transition duration-200 transform hover:scale-110"
         >
-          <Plus size={16} />
+          <Plus size={18} />
         </button>
       </div>
       <button
         onClick={handleRemove}
-        className="text-red-400 hover:text-red-300 p-2 rounded-full hover:bg-gray-700"
+        className="text-red-400 hover:text-red-300 p-2.5 rounded-full hover:bg-gray-700 transition duration-200 transform hover:scale-110"
         aria-label="Remove item from cart"
       >
-        <X size={20} />
+        <X size={22} />
       </button>
     </div>
   );
@@ -832,38 +826,38 @@ const Cart = ({ onProceedToCheckout, onBackToList }) => {
   const { cartItems, getTotalPrice } = useContext(CartContext);
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <h2 className="text-4xl font-extrabold text-white text-center mb-8 uppercase tracking-tight">Your Drop List</h2>
+    <div className="container mx-auto px-4 py-8 max-w-2xl animate-fade-in">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-10 uppercase tracking-tighter">Your Drop List</h2>
       {cartItems.length === 0 ? (
-        <p className="text-center text-gray-400 text-xl">Your drop list is empty. Time to collect some heat!</p>
+        <p className="text-center text-gray-400 text-xl">Your drop list is empty. Time to collect some heat from XApparel!</p>
       ) : (
         <>
-          <div className="mb-6">
+          <div className="mb-8">
             {cartItems.map((item, index) => {
               const uniqueCartItemKey = `${item.id}-${item.selectedSize || 'nosize'}-${item.selectedColor || 'nocolor'}`;
               return <CartItem key={uniqueCartItemKey} item={item} />;
             })}
           </div>
-          <div className="flex justify-between items-center bg-gray-800 p-6 rounded-xl shadow-inner border border-gray-700">
-            <span className="text-2xl font-bold text-gray-100">Total:</span>
-            <span className="text-3xl font-extrabold text-teal-400">{formatCurrency(getTotalPrice())}</span>
+          <div className="flex justify-between items-center bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl shadow-inner border border-gray-700 animate-fade-in-item">
+            <span className="text-3xl font-bold text-gray-100">Total:</span>
+            <span className="text-4xl font-extrabold text-teal-400">{formatCurrency(getTotalPrice())}</span>
           </div>
-          <div className="mt-8 text-center">
+          <div className="mt-10 text-center">
             <button
               onClick={onProceedToCheckout}
-              className="bg-teal-500 text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-teal-600 transition duration-300 transform hover:scale-105 shadow-lg uppercase tracking-wider"
+              className="bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:from-teal-600 hover:to-cyan-700 transition duration-300 transform hover:scale-105 shadow-lg uppercase tracking-wider custom-button-glow"
             >
               Secure the Drop
             </button>
           </div>
         </>
       )}
-      <div className="mt-8 text-center">
+      <div className="mt-10 text-center">
         <button
           onClick={onBackToList}
-          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold"
+          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold text-lg"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={22} />
           <span>Continue Browsing Drops</span>
         </button>
       </div>
@@ -910,11 +904,11 @@ const Checkout = ({ onBackToCart, onOrderPlaced }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-xl bg-gray-800 rounded-xl shadow-lg border border-gray-700">
-      <h2 className="text-4xl font-extrabold text-white text-center mb-8 uppercase tracking-tight">Finalize Your Drop</h2>
+    <div className="container mx-auto px-4 py-8 max-w-xl bg-gray-800 rounded-2xl shadow-xl border border-gray-700 animate-fade-in">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-10 uppercase tracking-tighter">Finalize Your Drop</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-gray-300 text-sm font-bold mb-2">Full Name</label>
+          <label htmlFor="name" className="block text-gray-300 text-base font-bold mb-2">Full Name</label>
           <input
             type="text"
             id="name"
@@ -922,11 +916,11 @@ const Checkout = ({ onBackToCart, onOrderPlaced }) => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">Email</label>
+          <label htmlFor="email" className="block text-gray-300 text-base font-bold mb-2">Email</label>
           <input
             type="email"
             id="email"
@@ -934,11 +928,11 @@ const Checkout = ({ onBackToCart, onOrderPlaced }) => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
           />
         </div>
         <div>
-          <label htmlFor="address" className="block text-gray-300 text-sm font-bold mb-2">Street Address</label>
+          <label htmlFor="address" className="block text-gray-300 text-base font-bold mb-2">Street Address</label>
           <input
             type="text"
             id="address"
@@ -946,12 +940,12 @@ const Checkout = ({ onBackToCart, onOrderPlaced }) => {
             value={formData.address}
             onChange={handleChange}
             required
-            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="city" className="block text-gray-300 text-sm font-bold mb-2">City / District</label>
+            <label htmlFor="city" className="block text-gray-300 text-base font-bold mb-2">City / District</label>
             <input
               type="text"
               id="city"
@@ -959,11 +953,11 @@ const Checkout = ({ onBackToCart, onOrderPlaced }) => {
               value={formData.city}
               onChange={handleChange}
               required
-              className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+              className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
             />
           </div>
           <div>
-            <label htmlFor="zip" className="block text-gray-300 text-sm font-bold mb-2">Zip Code</label>
+            <label htmlFor="zip" className="block text-gray-300 text-base font-bold mb-2">Zip Code</label>
             <input
               type="text"
               id="zip"
@@ -971,32 +965,32 @@ const Checkout = ({ onBackToCart, onOrderPlaced }) => {
               value={formData.zip}
               onChange={handleChange}
               required
-              className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+              className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
             />
           </div>
         </div>
 
         {submissionError && (
-          <p className="text-red-400 text-center font-semibold mt-4">{submissionError}</p>
+          <p className="text-red-400 text-center font-semibold mt-4 animate-fade-in">{submissionError}</p>
         )}
 
-        <div className="flex justify-between items-center pt-4">
+        <div className="flex justify-between items-center pt-6">
           <button
             type="button"
             onClick={onBackToCart}
             className="flex items-center space-x-2 text-teal-400 hover:text-teal-300 transition duration-300 font-semibold text-lg"
           >
-            <Package size={20} />
+            <Package size={22} />
             <span>Back to Drop List</span>
           </button>
           <button
             type="submit"
             disabled={isSubmitting || cartItems.length === 0}
-            className="bg-teal-500 text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-teal-600 transition duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center uppercase tracking-wider"
+            className="bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:from-teal-600 hover:to-cyan-700 transition duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center uppercase tracking-wider custom-button-glow"
           >
             {isSubmitting ? (
               <span className="flex items-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -1009,19 +1003,19 @@ const Checkout = ({ onBackToCart, onOrderPlaced }) => {
         </div>
       </form>
     </div>
-  );
+  );a
 };
 
 // 8. Order Confirmation Component
 const OrderConfirmation = ({ onGoHome }) => {
   return (
-    <div className="container mx-auto px-4 py-16 max-w-md text-center bg-gray-800 rounded-xl shadow-xl animate-fade-in border border-gray-700">
-      <CheckCircle size={80} className="text-teal-400 mx-auto mb-6 animate-bounce-in" />
-      <h2 className="text-4xl font-extrabold text-white mb-4">Drop Secured!</h2>
-      <p className="text-gray-400 text-lg mb-8">Thanks for choosing XApparel. Your order is confirmed and on its way to you.</p>
+    <div className="container mx-auto px-4 py-16 max-w-md text-center bg-gray-800 rounded-2xl shadow-xl animate-fade-in border border-gray-700">
+      <CheckCircle size={90} className="text-teal-400 mx-auto mb-8 animate-bounce-in-icon" />
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-5 animate-slide-in-up-1">Drop Secured!</h2>
+      <p className="text-gray-400 text-lg mb-10 animate-slide-in-up-2">Thanks for choosing XApparel. Your order is confirmed and on its way to you.</p>
       <button
         onClick={onGoHome}
-        className="bg-teal-500 text-white px-6 py-3 rounded-full text-lg hover:bg-teal-600 transition duration-300 shadow-md uppercase tracking-wider"
+        className="bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-8 py-4 rounded-full text-xl font-semibold hover:from-teal-600 hover:to-cyan-700 transition duration-300 shadow-md uppercase tracking-wider custom-button-glow animate-slide-in-up-3"
       >
         Explore More Drops
       </button>
@@ -1032,20 +1026,20 @@ const OrderConfirmation = ({ onGoHome }) => {
 // 9. About Us Component
 const AboutUs = ({ onGoHome }) => {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-3xl bg-gray-800 rounded-xl shadow-lg border border-gray-700 text-gray-100">
-      <h2 className="text-4xl font-extrabold text-white text-center mb-8 uppercase tracking-tight">About XApparel</h2>
+    <div className="container mx-auto px-4 py-8 max-w-3xl bg-gray-800 rounded-2xl shadow-xl border border-gray-700 text-gray-100 animate-fade-in">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-10 uppercase tracking-tighter">About XApparel</h2>
       <p className="text-gray-400 text-lg mb-6 leading-relaxed">
         XApparel was born from the concrete jungle, forged in the spirit of raw individuality and authentic self-expression. We're not just selling clothes; we're crafting a lifestyle. Each piece in our collection is meticulously designed to reflect the pulse of the streets – bold, uncompromising, and always pushing boundaries.
       </p>
       <p className="text-gray-400 text-lg mb-6 leading-relaxed">
         We believe in quality that lasts, fabrics that feel good, and designs that speak volumes without saying a word. From the darkest alleyways to the brightest city lights, XApparel is your uniform for navigating the urban landscape. Join the crew. Wear your story.
       </p>
-      <div className="mt-8 text-center">
+      <div className="mt-10 text-center">
         <button
           onClick={onGoHome}
-          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold"
+          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold text-lg"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={22} />
           <span>Back to Drops</span>
         </button>
       </div>
@@ -1086,11 +1080,11 @@ const ContactUs = ({ onGoHome }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-xl bg-gray-800 rounded-xl shadow-lg border border-gray-700 text-gray-100">
-      <h2 className="text-4xl font-extrabold text-white text-center mb-8 uppercase tracking-tight">Connect with the XApparel Crew</h2>
+    <div className="container mx-auto px-4 py-8 max-w-xl bg-gray-800 rounded-2xl shadow-xl border border-gray-700 animate-fade-in">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-10 uppercase tracking-tighter">Connect with the XApparel Crew</h2>
       <form onSubmit={handleContactSubmit} className="space-y-6">
         <div>
-          <label htmlFor="contact-name" className="block text-gray-300 text-sm font-bold mb-2">Name</label>
+          <label htmlFor="contact-name" className="block text-gray-300 text-base font-bold mb-2">Name</label>
           <input
             type="text"
             id="contact-name"
@@ -1098,11 +1092,11 @@ const ContactUs = ({ onGoHome }) => {
             value={contactFormData.name}
             onChange={handleContactChange}
             required
-            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
           />
         </div>
         <div>
-          <label htmlFor="contact-email" className="block text-gray-300 text-sm font-bold mb-2">Email</label>
+          <label htmlFor="contact-email" className="block text-gray-300 text-base font-bold mb-2">Email</label>
           <input
             type="email"
             id="contact-email"
@@ -1110,11 +1104,11 @@ const ContactUs = ({ onGoHome }) => {
             value={contactFormData.email}
             onChange={handleContactChange}
             required
-            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
           />
         </div>
         <div>
-          <label htmlFor="contact-message" className="block text-gray-300 text-sm font-bold mb-2">Message</label>
+          <label htmlFor="contact-message" className="block text-gray-300 text-base font-bold mb-2">Message</label>
           <textarea
             id="contact-message"
             name="message"
@@ -1122,7 +1116,7 @@ const ContactUs = ({ onGoHome }) => {
             onChange={handleContactChange}
             required
             rows="5"
-            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="shadow appearance-none border border-gray-700 rounded-lg w-full py-3.5 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 text-base"
           ></textarea>
         </div>
 
@@ -1133,15 +1127,15 @@ const ContactUs = ({ onGoHome }) => {
           <p className="text-red-400 text-center font-semibold mt-4">Failed to send message. Please try again later.</p>
         )}
 
-        <div className="text-center pt-4">
+        <div className="text-center pt-6">
           <button
             type="submit"
             disabled={isContactSubmitting}
-            className="bg-teal-500 text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-teal-600 transition duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider flex items-center justify-center mx-auto"
+            className="bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-8 py-4 rounded-full text-xl font-semibold hover:from-teal-600 hover:to-cyan-700 transition duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider flex items-center justify-center mx-auto custom-button-glow"
           >
             {isContactSubmitting ? (
               <span className="flex items-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -1153,12 +1147,12 @@ const ContactUs = ({ onGoHome }) => {
           </button>
         </div>
       </form>
-      <div className="mt-8 text-center">
+      <div className="mt-10 text-center">
         <button
           onClick={onGoHome}
-          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold"
+          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold text-lg"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={22} />
           <span>Back to Drops</span>
         </button>
       </div>
@@ -1178,32 +1172,32 @@ const Lookbook = ({ onGoHome }) => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-5xl bg-gray-800 rounded-xl shadow-lg border border-gray-700 text-gray-100">
-      <h2 className="text-4xl font-extrabold text-white text-center mb-8 uppercase tracking-tight">XApparel Lookbook</h2>
+    <div className="container mx-auto px-4 py-8 max-w-5xl bg-gray-800 rounded-2xl shadow-xl border border-gray-700 text-gray-100 animate-fade-in">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-10 uppercase tracking-tighter">XApparel Lookbook</h2>
       <p className="text-gray-400 text-lg mb-12 text-center">
         Dive into the XApparel aesthetic. See how our drops hit the streets.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {lookbookImages.map((image, index) => (
-          <div key={index} className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105">
+          <div key={index} className="rounded-xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 custom-border-glow animate-fade-in-item">
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full h-64 object-cover object-center"
+              className="w-full h-72 object-cover object-center"
               onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/800x600/555555/999999?text=Image+Error`; }}
             />
-            <div className="p-4 bg-gray-700 text-gray-200 text-center font-semibold">
+            <div className="p-5 bg-gray-700 text-gray-200 text-center font-semibold text-lg">
               {image.alt}
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-8 text-center">
+      <div className="mt-10 text-center">
         <button
           onClick={onGoHome}
-          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold"
+          className="flex items-center justify-center mx-auto space-x-2 text-gray-400 hover:text-gray-300 transition duration-300 font-semibold text-lg"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={22} />
           <span>Back to Drops</span>
         </button>
       </div>
@@ -1215,54 +1209,54 @@ const Lookbook = ({ onGoHome }) => {
 // 12. Header Component
 const Header = ({ onNavigate, cartItemCount, searchTerm, onSearchChange }) => {
   return (
-    <header className="bg-gradient-to-r from-zinc-900 to-black text-white shadow-lg py-5 px-6 border-b border-gray-700">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+    <header className="bg-gradient-to-r from-zinc-950 to-black text-white shadow-2xl py-6 px-6 border-b border-gray-800">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-5 md:space-y-0">
         <h1
-          className="text-5xl font-extrabold tracking-wide uppercase cursor-pointer hover:text-gray-300 transition duration-300 text-center"
+          className="text-6xl font-extrabold tracking-tighter uppercase cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500 hover:from-teal-300 hover:to-cyan-400 transition duration-300 text-center animate-pulse-once"
           onClick={() => onNavigate('home')}
         >
           XApparel
         </h1>
-        <div className="relative w-full md:w-auto md:flex-grow max-w-md mx-auto md:mx-0">
+        <div className="relative w-full md:w-auto md:flex-grow max-w-md mx-auto md:mx-0 animate-fade-in">
           <input
             type="text"
             placeholder="Search all drops..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full py-2 px-4 pr-10 bg-gray-800 text-gray-100 rounded-full border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder-gray-400"
+            className="w-full py-3 px-5 pr-12 bg-gray-800 text-gray-100 rounded-full border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 placeholder-gray-400 text-base"
           />
-          <Search size={20} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" />
         </div>
-        <nav className="flex items-center space-x-4 sm:space-x-6 mt-4 md:mt-0">
+        <nav className="flex items-center space-x-5 sm:space-x-7 mt-5 md:mt-0 animate-fade-in">
           <button
             onClick={() => onNavigate('lookbook')}
-            className="text-gray-200 hover:text-teal-400 transition duration-300 text-lg font-semibold flex items-center space-x-2"
+            className="text-gray-300 hover:text-teal-400 transition duration-300 text-lg font-semibold flex items-center space-x-2 transform hover:scale-105"
           >
-            <Grid size={20} />
+            <Grid size={22} />
             <span>Lookbook</span>
           </button>
           <button
             onClick={() => onNavigate('about')}
-            className="text-gray-200 hover:text-teal-400 transition duration-300 text-lg font-semibold flex items-center space-x-2"
+            className="text-gray-300 hover:text-teal-400 transition duration-300 text-lg font-semibold flex items-center space-x-2 transform hover:scale-105"
           >
-            <Info size={20} />
+            <Info size={22} />
             <span>About</span>
           </button>
           <button
             onClick={() => onNavigate('contact')}
-            className="text-gray-200 hover:text-teal-400 transition duration-300 text-lg font-semibold flex items-center space-x-2"
+            className="text-gray-300 hover:text-teal-400 transition duration-300 text-lg font-semibold flex items-center space-x-2 transform hover:scale-105"
           >
-            <Mail size={20} />
+            <Mail size={22} />
             <span>Contact</span>
           </button>
           <button
             onClick={() => onNavigate('cart')}
-            className="relative p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition duration-300 transform hover:scale-105 shadow-lg"
+            className="relative p-3.5 rounded-full bg-gray-700 hover:bg-gray-600 transition duration-300 transform hover:scale-105 shadow-lg"
             aria-label={`View cart with ${cartItemCount} items`}
           >
-            <ShoppingCart size={28} className="text-gray-100"/>
+            <ShoppingCart size={30} className="text-gray-100"/>
             {cartItemCount > 0 && (
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center -mt-2 -mr-2 animate-bounce-in">
+              <span className="absolute top-0 right-0 bg-red-600 text-white text-sm font-bold rounded-full h-7 w-7 flex items-center justify-center -mt-2.5 -mr-2.5 animate-bounce-in-cart-count">
                 {cartItemCount}
               </span>
             )}
@@ -1353,38 +1347,212 @@ function App() {
     <CartContext.Provider
       value={{ cartItems, addToCart, removeFromCart, updateQuantity, getTotalPrice, clearCart }}
     >
-      <div className="min-h-screen bg-gray-900 font-sans text-gray-100">
+      <div className="min-h-screen bg-gradient-to-br from-zinc-900 to-black font-sans text-gray-100">
         <style>
           {`
+          /* Base Fade-in animation for overall sections */
           @keyframes fade-in {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes bounce-in {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); }
+            from { opacity: 0; }
+            to { opacity: 1; }
           }
           .animate-fade-in {
-            animation: fade-in 0.5s ease-out forwards;
+            animation: fade-in 0.8s ease-out forwards;
+          }
+
+          /* Fade-in with scale for Hero Section */
+          @keyframes fade-in-scale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+          }
+          .animate-fade-in-scale {
+            animation: fade-in-scale 1s ease-out forwards;
+          }
+
+          /* Bounce-in animation for confirmation icon */
+          @keyframes bounce-in-icon {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            75% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+          }
+          .animate-bounce-in-icon {
+            animation: bounce-in-icon 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+          }
+
+          /* Bounce-in for the Add to Drop button */
+          @keyframes bounce-in {
+            0% { transform: translateY(20px); opacity: 0; }
+            60% { transform: translateY(-5px); opacity: 1; }
+            80% { transform: translateY(2px); }
+            100% { transform: translateY(0); opacity: 1; }
           }
           .animate-bounce-in {
-            animation: bounce-in 0.5s ease-out forwards;
+            animation: bounce-in 0.7s ease-out forwards;
+            animation-delay: 0.5s; /* Delay to appear after other elements */
+            opacity: 0; /* Start hidden */
           }
+
+          /* Slide-in from bottom with staggered delays */
+          @keyframes slide-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-slide-in-up-1 { animation: slide-in-up 0.6s ease-out forwards; animation-delay: 0.2s; opacity: 0; }
+          .animate-slide-in-up-2 { animation: slide-in-up 0.6s ease-out forwards; animation-delay: 0.4s; opacity: 0; }
+          .animate-slide-in-up-3 { animation: slide-in-up 0.6s ease-out forwards; animation-delay: 0.6s; opacity: 0; }
+          .animate-slide-in-up-4 { animation: slide-in-up 0.6s ease-out forwards; animation-delay: 0.8s; opacity: 0; }
+          .animate-slide-in-up-5 { animation: slide-in-up 0.6s ease-out forwards; animation-delay: 1.0s; opacity: 0; }
+
+          /* Fade-in for individual items in lists (e.g., cart, reviews, lookbook) */
+          @keyframes fade-in-item {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-in-item {
+            animation: fade-in-item 0.5s ease-out forwards;
+            opacity: 0; /* Start hidden */
+          }
+          .animate-fade-in-item:nth-child(1) { animation-delay: 0.1s; }
+          .animate-fade-in-item:nth-child(2) { animation-delay: 0.2s; }
+          .animate-fade-in-item:nth-child(3) { animation-delay: 0.3s; }
+          .animate-fade-in-item:nth-child(4) { animation-delay: 0.4s; }
+          .animate-fade-in-item:nth-child(5) { animation-delay: 0.5s; }
+          .animate-fade-in-item:nth-child(6) { animation-delay: 0.6s; }
+          .animate-fade-in-item:nth-child(7) { animation-delay: 0.7s; }
+          .animate-fade-in-item:nth-child(8) { animation-delay: 0.8s; }
+          .animate-fade-in-item:nth-child(9) { animation-delay: 0.9s; }
+          .animate-fade-in-item:nth-child(10) { animation-delay: 1.0s; }
+
+
+          /* Pulse animation for the XApparel logo (one time on load) */
+          @keyframes pulse-once {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+          }
+          .animate-pulse-once {
+            animation: pulse-once 1s ease-out 1;
+          }
+
+          /* Specific bounce-in for cart count */
+          @keyframes bounce-in-cart-count {
+            0%, 20%, 50%, 80%, 100% {
+              transform: translateY(0);
+            }
+            40% {
+              transform: translateY(-8px);
+            }
+            60% {
+              transform: translateY(-4px);
+            }
+          }
+          .animate-bounce-in-cart-count {
+            animation: bounce-in-cart-count 0.8s ease-out;
+          }
+
+          /* Custom button glow on hover */
+          .custom-button-glow {
+            position: relative;
+            overflow: hidden;
+          }
+
+          .custom-button-glow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 255, 255, 0.4); /* Cyan glow */
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+            z-index: 0;
+          }
+
+          .custom-button-glow:hover::before {
+            width: 200%;
+            height: 200%;
+            opacity: 1;
+          }
+
+          .custom-button-glow span, .custom-button-glow svg {
+            position: relative;
+            z-index: 1;
+          }
+
+          /* Custom border glow for cards */
+          .custom-border-glow {
+            border: 2px solid transparent;
+            position: relative;
+            background-clip: padding-box;
+          }
+
+          .custom-border-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 1rem; /* Adjust based on parent rounded-xl */
+            background: linear-gradient(45deg, #00BCD4, #00E5FF, #00BCD4); /* Teal to Cyan */
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+          }
+
+          .custom-border-glow:hover::before {
+            opacity: 1;
+          }
+
+          /* Subtle border glow for review items etc. */
+          .custom-border-glow-subtle {
+              border: 1px solid transparent;
+              position: relative;
+              background-clip: padding-box;
+          }
+          .custom-border-glow-subtle::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              border: 1px solid transparent;
+              border-radius: 0.5rem; /* Adjust based on parent rounded-lg */
+              background: linear-gradient(45deg, rgba(0, 188, 212, 0.5), rgba(0, 229, 255, 0.5)); /* Teal to Cyan with transparency */
+              -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+              -webkit-mask-composite: xor;
+              mask-composite: exclude;
+              opacity: 0;
+              transition: opacity 0.3s ease-out;
+          }
+          .custom-border-glow-subtle:hover::before {
+              opacity: 1;
+          }
+
+          /* Image fade-in */
+          @keyframes fade-in-image {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+          }
+          .animate-fade-in-image {
+            animation: fade-in-image 0.6s ease-out forwards;
+          }
+
           /* Custom scrollbar for dark theme */
           ::-webkit-scrollbar {
             width: 8px;
           }
           ::-webkit-scrollbar-track {
-            background: #333;
+            background: #222;
             border-radius: 10px;
           }
           ::-webkit-scrollbar-thumb {
-            background: #555;
+            background: #444;
             border-radius: 10px;
           }
           ::-webkit-scrollbar-thumb:hover {
-            background: #777;
+            background: #666;
           }
           /* Style for select dropdown arrow */
           select {
@@ -1403,7 +1571,7 @@ function App() {
           onSearchChange={setSearchTerm}
         />
 
-        <main className="py-10">
+        <main className="py-12">
           {(() => {
             switch (currentPage) {
               case 'home':
@@ -1444,17 +1612,20 @@ function App() {
           })()}
         </main>
 
-        <footer className="bg-black text-gray-400 text-center py-6 mt-12 shadow-inner border-t border-gray-700">
-          <p>&copy; {new Date().getFullYear()} XApparel. All rights reserved.</p>
-          <div className="flex justify-center space-x-6 mt-4">
-            <a href="#" className="text-gray-400 hover:text-teal-400 transition duration-300" aria-label="XApparel on Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"/></svg>
+        <footer className="bg-gradient-to-r from-black to-zinc-950 text-gray-400 text-center py-8 mt-20 shadow-inner border-t border-gray-800">
+          <p className="text-base">&copy; {new Date().getFullYear()} XApparel. All rights reserved.</p>
+          <div className="flex justify-center space-x-7 mt-5">
+            <a href="#" className="text-gray-400 hover:text-teal-400 transition duration-300 transform hover:scale-110" aria-label="XApparel on Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"/></svg>
             </a>
-            <a href="#" className="text-gray-400 hover:text-teal-400 transition duration-300" aria-label="XApparel on X (Twitter)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            <a href="#" className="text-gray-400 hover:text-teal-400 transition duration-300 transform hover:scale-110" aria-label="XApparel on X (Twitter)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </a>
-            <a href="#" className="text-gray-400 hover:text-teal-400 transition duration-300" aria-label="XApparel on TikTok">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tiktok"><path d="M9 12H4.77a2 2 0 0 0-1.74 1l.01 0a2 2 0 0 0-.25 2.18L8 22V12a4 4 0 0 1 4-4h2.44a2 2 0 0 1 2 2.45v3.52l3.47 2a2 2 0 0 0 2.53-2.19V6.37a5 5 0 0 0-4.7-5.32c-.05 0-.17 0-.24.03l-.01.01A5 5 0 0 0 12.72 1.9h-.13A5 5 0 0 0 9 6.27V12Z"/></svg>
+            <a href="#" className="text-gray-400 hover:text-teal-400 transition duration-300 transform hover:scale-110" aria-label="XApparel on TikTok">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tiktok"><path d="M9 12H4.77a2 2 0 0 0-1.74 1l.01 0a2 2 0 0 0-.25 2.18L8 22V12a4 4 0 0 1 4-4h2.44a2 2 0 0 1 2 2.45v3.52l3.47 2a2 2 0 0 0 2.53-2.19V6.37a5 5 0 0 0-4.7-5.32c-.05 0-.17 0-.24.03l-.01.01A5 5 0 0 0 12.72 1.9h-.13A5 5 0 0 0 9 6.27V12Z"/></svg>
+            </a>
+            <a href="#" className="text-gray-400 hover:text-teal-400 transition duration-300 transform hover:scale-110" aria-label="XApparel on Global Network">
+              <Globe size={26} /> {/* Added a globe icon for general presence */}
             </a>
           </div>
         </footer>
